@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+/* LINK CARDS (The Buttons):
+https://square-king-587e.rburja.workers.dev/
+*/
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Links</title>
     <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #f4f4f9; }
-        .container { text-align: center; background: white; padding: 2rem; border-radius: 8px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        a { display: block; margin: 10px 0; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
-        a:hover { background: #0056b3; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            display: flex; align-items: center; justify-content: center; 
+            min-height: 100vh; color: white;
+        }
+        .container { 
+            width: 90%; max-width: 400px; text-align: center; 
+            padding: 40px 20px; background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(10px); border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        h1 { margin-bottom: 10px; font-size: 1.8rem; }
+        p { margin-bottom: 30px; opacity: 0.8; font-weight: 300; }
+        .link-card { 
+            display: block; margin-bottom: 15px; padding: 15px; 
+            background: rgba(255, 255, 255, 0.2); color: white; 
+            text-decoration: none; border-radius: 12px; 
+            transition: all 0.3s ease; border: 1px solid transparent;
+            font-weight: 500;
+        }
+        .link-card:hover { 
+            background: rgba(255, 255, 255, 0.3); 
+            transform: translateY(-3px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to My Page</h1>
-        <p>Check out these helpful links:</p>
-        <a href="https://google.com" target="_blank">Google</a>
-        <a href="https://cloudflare.com" target="_blank">Cloudflare</a>
-        <a href="https://github.com" target="_blank">My GitHub</a>
+        <h1>Links</h1>
+        <p>For Rob and Andy</p>
+        
+        <a href="https://chat.qwen.ai/" class="link-card" target="_blank">Qwen / X</a>
+        <a href="https://gemini.google.com/app" class="link-card" target="_blank">Gemini</a>
+        <a href="https://copilot.microsoft.com/" class="link-card" target="_blank">Copilot</a>
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSfXZpForX_pxCJG41vVu0jugnomqWpqosqEcJGeKk8aoq1-Jg/viewform" class="link-card" target="_blank">Extra Games Form</a>
+        <a href="https://docs.google.com/spreadsheets/d/1WPkjtBqi7wD4EtGHVUJJ1feYdb9kOptzF3ld2-EkZGM/edit?gid=700758585#gid=700758585" class="link-card" target="_blank">Footy Sheet</a>
     </div>
 </body>
 </html>
