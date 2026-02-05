@@ -9,7 +9,6 @@
         
         body { 
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
-            /* Animated Mesh Gradient */
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
@@ -39,7 +38,8 @@
         p { margin-bottom: 35px; opacity: 0.9; font-weight: 400; font-size: 1rem; color: #f0f0f0; }
 
         .link-card { 
-            display: block; margin-bottom: 16px; padding: 18px; 
+            display: flex; align-items: center; justify-content: flex-start;
+            margin-bottom: 16px; padding: 18px 25px; 
             background: rgba(255, 255, 255, 0.15); 
             color: white; 
             text-decoration: none; 
@@ -50,6 +50,11 @@
             letter-spacing: 0.3px;
         }
 
+        .icon {
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
         .link-card:hover { 
             background: rgba(255, 255, 255, 0.25); 
             transform: scale(1.03);
@@ -57,8 +62,9 @@
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
-        /* Highlight for the new link */
-        .special-link {
+        /* Styling for the bottom link */
+        .notebook-link {
+            margin-top: 25px;
             background: rgba(255, 255, 255, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.5);
         }
@@ -70,16 +76,30 @@
     <h1>Links</h1>
     <p>Test for Rob</p>
 
-    <a href="https://notebooklm.google.com/" class="link-card special-link" target="_blank">✨ NotebookLM</a>
-    <a href="https://chat.qwen.ai/" class="link-card" target="_blank">Qwen / X</a>
-    <a href="https://gemini.google.com/app" class="link-card" target="_blank">Gemini</a>
-    <a href="https://copilot.microsoft.com/" class="link-card" target="_blank">Copilot</a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXZpForX_pxCJG41vVu0jugnomqWpqosqEcJGeKk8aoq1-Jg/viewform" class="link-card" target="_blank">Extra Games Form</a>
-    <a href="https://docs.google.com/spreadsheets/d/1WPkjtBqi7wD4EtGHVUJJ1feYdb9kOptzF3ld2-EkZGM/edit?gid=700758585#gid=700758585" class="link-card" target="_blank">Footy Sheet</a>
+    <a href="https://chat.qwen.ai/" class="link-card" target="_blank">
+        <span class="icon">🤖</span> Qwen / X
+    </a>
+    <a href="https://gemini.google.com/app" class="link-card" target="_blank">
+        <span class="icon">♊</span> Gemini
+    </a>
+    <a href="https://copilot.microsoft.com/" class="link-card" target="_blank">
+        <span class="icon">🌊</span> Copilot
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXZpForX_pxCJG41vVu0jugnomqWpqosqEcJGeKk8aoq1-Jg/viewform" class="link-card" target="_blank">
+        <span class="icon">📝</span> Extra Games Form
+    </a>
+    <a href="https://docs.google.com/spreadsheets/d/1WPkjtBqi7wD4EtGHVUJJ1feYdb9kOptzF3ld2-EkZGM/edit?gid=700758585#gid=700758585" class="link-card" target="_blank">
+        <span class="icon">⚽</span> Footy Sheet
+    </a>
+    
+    <a href="https://notebooklm.google.com/" class="link-card notebook-link" target="_blank">
+        <span class="icon">✨</span> NotebookLM
+    </a>
 </div>
 
 </body>
 </html>
+
 
 
 
