@@ -6,48 +6,81 @@
     <title>My Links</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            /* Animated Mesh Gradient */
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
             display: flex; align-items: center; justify-content: center; 
             min-height: 100vh; color: white;
+            overflow-x: hidden;
         }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .container { 
-            width: 90%; max-width: 400px; text-align: center; 
-            padding: 40px 20px; background: rgba(255, 255, 255, 0.1); 
-            backdrop-filter: blur(10px); border-radius: 20px; 
+            width: 95%; max-width: 420px; text-align: center; 
+            padding: 40px 25px; 
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(16px) saturate(180%); 
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 24px; 
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
-        h1 { margin-bottom: 10px; font-size: 1.8rem; }
-        p { margin-bottom: 30px; opacity: 0.8; font-weight: 300; }
+
+        h1 { margin-bottom: 8px; font-size: 2.2rem; letter-spacing: -0.5px; }
+        p { margin-bottom: 35px; opacity: 0.9; font-weight: 400; font-size: 1rem; color: #f0f0f0; }
+
         .link-card { 
-            display: block; margin-bottom: 15px; padding: 15px; 
-            background: rgba(255, 255, 255, 0.2); color: white; 
-            text-decoration: none; border-radius: 12px; 
-            transition: all 0.3s ease; border: 1px solid transparent;
-            font-weight: 500;
+            display: block; margin-bottom: 16px; padding: 18px; 
+            background: rgba(255, 255, 255, 0.15); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 14px; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
+
         .link-card:hover { 
-            background: rgba(255, 255, 255, 0.3); 
-            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.25); 
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* Highlight for the new link */
+        .special-link {
+            background: rgba(255, 255, 255, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Links</h1>
-        <p>Test for Rob</p>
-        
-        <a href="https://chat.qwen.ai/" class="link-card" target="_blank">Qwen / X</a>
-        <a href="https://gemini.google.com/app" class="link-card" target="_blank">Gemini</a>
-        <a href="https://copilot.microsoft.com/" class="link-card" target="_blank">Copilot</a>
-		<a href="https://docs.google.com/forms/d/e/1FAIpQLSfXZpForX_pxCJG41vVu0jugnomqWpqosqEcJGeKk8aoq1-Jg/viewform" class="link-card" target="_blank">Extra Games Form (Access Required)</a>
-        <a href="https://docs.google.com/spreadsheets/d/1WPkjtBqi7wD4EtGHVUJJ1feYdb9kOptzF3ld2-EkZGM/edit?gid=700758585#gid=700758585" class="link-card" target="_blank">Footy Sheet (Access Required)</a>
-    </div>
+
+<div class="container">
+    <h1>Links</h1>
+    <p>Test for Rob</p>
+
+    <a href="https://notebooklm.google.com/" class="link-card special-link" target="_blank">✨ NotebookLM</a>
+    <a href="https://chat.qwen.ai/" class="link-card" target="_blank">Qwen / X</a>
+    <a href="https://gemini.google.com/app" class="link-card" target="_blank">Gemini</a>
+    <a href="https://copilot.microsoft.com/" class="link-card" target="_blank">Copilot</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXZpForX_pxCJG41vVu0jugnomqWpqosqEcJGeKk8aoq1-Jg/viewform" class="link-card" target="_blank">Extra Games Form</a>
+    <a href="https://docs.google.com/spreadsheets/d/1WPkjtBqi7wD4EtGHVUJJ1feYdb9kOptzF3ld2-EkZGM/edit?gid=700758585#gid=700758585" class="link-card" target="_blank">Footy Sheet</a>
+</div>
+
 </body>
 </html>
+
 
 
 
