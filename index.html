@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Links</title>
+    <title>My Dynamic Directory</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -14,7 +14,6 @@
             animation: gradient 15s ease infinite;
             display: flex; align-items: center; justify-content: center; 
             min-height: 100vh; color: white;
-            overflow-x: hidden;
         }
 
         @keyframes gradient {
@@ -27,83 +26,75 @@
             width: 95%; max-width: 420px; text-align: center; 
             padding: 40px 25px; 
             background: rgba(255, 255, 255, 0.1); 
-            backdrop-filter: blur(16px) saturate(180%); 
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            backdrop-filter: blur(16px); 
             border-radius: 24px; 
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
-        h1 { margin-bottom: 8px; font-size: 2.2rem; letter-spacing: -0.5px; }
-        p { margin-bottom: 35px; opacity: 0.9; font-weight: 400; font-size: 1rem; color: #f0f0f0; }
+        h1 { margin-bottom: 25px; font-size: 2.2rem; }
 
         .link-card { 
-            display: flex; align-items: center; justify-content: flex-start;
-            margin-bottom: 16px; padding: 18px 25px; 
+            display: block;
+            margin-bottom: 16px; padding: 18px; 
             background: rgba(255, 255, 255, 0.15); 
             color: white; 
             text-decoration: none; 
             border-radius: 14px; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            transition: all 0.3s ease; 
             border: 1px solid rgba(255, 255, 255, 0.1);
             font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-
-        .icon {
-            margin-right: 15px;
-            font-size: 1.2rem;
         }
 
         .link-card:hover { 
-            background: rgba(255, 255, 255, 0.25); 
-            transform: scale(1.03);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.3); 
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        /* Styling for the bottom link */
-        .notebook-link {
-            margin-top: 25px;
-            background: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
+        #links-list.loading { opacity: 0.5; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Links</h1>
-    <p>Test for Rob</p>
-
-    <a href="https://chat.qwen.ai/" class="link-card" target="_blank">
-        <span class="icon">🤖</span> Qwen / X
-    </a>
-    <a href="https://gemini.google.com/app" class="link-card" target="_blank">
-        <span class="icon">♊</span> Gemini
-    </a>
-    <a href="https://copilot.microsoft.com/" class="link-card" target="_blank">
-        <span class="icon">🌊</span> Copilot
-    </a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXZpForX_pxCJG41vVu0jugnomqWpqosqEcJGeKk8aoq1-Jg/viewform" class="link-card" target="_blank">
-        <span class="icon">📝</span> Extra Games Form (Restricted)
-    </a>
-    <a href="https://docs.google.com/spreadsheets/d/1WPkjtBqi7wD4EtGHVUJJ1feYdb9kOptzF3ld2-EkZGM/edit?gid=700758585#gid=700758585" class="link-card" target="_blank">
-        <span class="icon">⚽</span> Footy Sheet (Restricted)
-    </a>
-    
-    <a href="https://notebooklm.google.com/" class="link-card notebook-link" target="_blank">
-        <span class="icon">✨</span> NotebookLM (Restricted)
-    </a>
+    <h1 id="title">My Links</h1>
+    <div id="links-list" class="loading">Fetching data...</div>
 </div>
+
+<script>
+    const API_URL = "https://script.google.com/macros/s/AKfycby4bGLMnDvNXRBvLWQhPXd5OKRTh4-zBzg9yH2p7yndMUZzWOYRIeEwoRdocdLXv0E1Ww/exec";
+
+    async function loadLinks() {
+        const listContainer = document.getElementById('links-list');
+        
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            
+            // Clear the loading message
+            listContainer.innerHTML = '';
+            listContainer.classList.remove('loading');
+
+            // Map through the JSON data
+            data.forEach(item => {
+                const linkElement = document.createElement('a');
+                linkElement.href = item.url;
+                linkElement.className = 'link-card';
+                linkElement.target = '_blank';
+                linkElement.textContent = item.name;
+                
+                listContainer.appendChild(linkElement);
+            });
+
+        } catch (error) {
+            console.error('Error:', error);
+            listContainer.innerHTML = 'Failed to load links.';
+        }
+    }
+
+    loadLinks();
+</script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
