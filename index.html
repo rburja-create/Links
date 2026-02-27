@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Dynamic Directory</title>
-    <!-- Added Font Awesome for the fallback icons -->
+    <!-- Font Awesome for the fallback icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -56,10 +56,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .link-card i {
-            font-size: 1.1rem;
-            opacity: 0.8;
-        }
+        .link-card i { font-size: 1.1rem; opacity: 0.8; }
 
         #links-list.loading { opacity: 0.5; }
     </style>
@@ -75,9 +72,8 @@
     const API_URL = "https://script.google.com/macros/s/AKfycby4bGLMnDvNXRBvLWQhPXd5OKRTh4-zBzg9yH2p7yndMUZzWOYRIeEwoRdocdLXv0E1Ww/exec";
 
     function openMessagePage(message) {
-        // Open the window first to avoid popup blockers
         const newWin = window.open('', '_blank');
-        if (!newWin) return; // In case popups are blocked
+        if (!newWin) return;
 
         const textPageContent = `
             <!DOCTYPE html>
@@ -112,11 +108,10 @@
                         text-align: center;
                     }
                     h1 { font-size: 2.2rem; margin-bottom: 30px; line-height: 1.3; }
-                    .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
                     .btn {
-                        display: flex; align-items: center; gap: 8px;
-                        padding: 12px 25px;
-                        background: rgba(255, 255, 255, 0.15);
+                        display: inline-flex; align-items: center; gap: 8px;
+                        padding: 12px 30px;
+                        background: rgba(255, 255, 255, 0.2);
                         color: white;
                         text-decoration: none;
                         border-radius: 12px;
@@ -127,33 +122,15 @@
                         font-size: 14px;
                     }
                     .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
-                    .btn-copy { background: #23a6d5; border-color: transparent; }
                 </style>
             </head>
             <body>
                 <div class="msg-box">
-                    <h1 id="msgText">${message}</h1>
-                    <div class="btn-group">
-                        <button class="btn btn-copy" onclick="copyText(this)">
-                            <i class="fas fa-copy"></i> <span class="btn-text">Copy Message</span>
-                        </button>
-                        <button class="btn" onclick="window.close()">
-                            <i class="fas fa-arrow-left"></i> <span>Return</span>
-                        </button>
-                    </div>
+                    <h1>${message}</h1>
+                    <button class="btn" onclick="window.close()">
+                        <i class="fas fa-arrow-left"></i> <span>Return</span>
+                    </button>
                 </div>
-                <script>
-                    function copyText(btn) {
-                        const text = document.getElementById('msgText').innerText;
-                        navigator.clipboard.writeText(text).then(() => {
-                            const originalHTML = btn.innerHTML;
-                            btn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
-                            setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
-                        }).catch(err => {
-                            console.error('Failed to copy: ', err);
-                        });
-                    }
-                <\/script>
             </body>
             </html>
         `;
