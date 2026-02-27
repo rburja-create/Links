@@ -141,13 +141,23 @@
 
     async function loadLinks() {
         const listContainer = document.getElementById('links-list');
+        const titleElement = document.getElementById('title'); // Target the H1
+        
         try {
             const response = await fetch(API_URL);
             const data = await response.json();
+            
+            // 1. Update the Title dynamically
+            if (data.pageTitle) {
+                titleElement.innerText = data.pageTitle;
+            }
+
+            // 2. Clear the loader
             listContainer.innerHTML = '';
             listContainer.classList.remove('loading');
 
-            data.forEach(item => {
+            // 3. Loop through the links (now inside data.links)
+            data.links.forEach(item => {
                 const linkElement = document.createElement('a');
                 linkElement.className = 'link-card';
                 
@@ -184,3 +194,4 @@
 
 </body>
 </html>
+
