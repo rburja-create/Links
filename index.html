@@ -74,9 +74,11 @@
 <script>
     const API_URL = "https://script.google.com/macros/s/AKfycby4bGLMnDvNXRBvLWQhPXd5OKRTh4-zBzg9yH2p7yndMUZzWOYRIeEwoRdocdLXv0E1Ww/exec";
 
-    // Function to generate and open the message page manually
     function openMessagePage(message) {
+        // Open the window first to avoid popup blockers
         const newWin = window.open('', '_blank');
+        if (!newWin) return; // In case popups are blocked
+
         const textPageContent = `
             <!DOCTYPE html>
             <html>
@@ -147,6 +149,8 @@
                             const originalHTML = btn.innerHTML;
                             btn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
                             setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
+                        }).catch(err => {
+                            console.error('Failed to copy: ', err);
                         });
                     }
                 <\/script>
@@ -180,8 +184,8 @@
                 if (isWebLink) {
                     linkElement.href = item.url;
                     linkElement.target = '_blank';
+                    linkElement.rel = 'noopener noreferrer';
                 } else {
-                    // Prevent navigation and use the JS function instead
                     linkElement.href = "#";
                     linkElement.onclick = (e) => {
                         e.preventDefault();
@@ -202,4 +206,3 @@
 
 </body>
 </html>
-
