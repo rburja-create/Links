@@ -160,8 +160,10 @@
             data.links.forEach(item => {
                 const linkElement = document.createElement('a');
                 linkElement.className = 'link-card';
-                
-                const isWebLink = item.url.toLowerCase().startsWith('http');
+
+                // Replace the current isWebLink line with this:
+                const isWebLink = (item.url && typeof item.url === 'string') ? item.url.toLowerCase().trim().startsWith('http') : false;
+                //const isWebLink = item.url.toLowerCase().startsWith('http');
                 const iconClass = isWebLink ? 'fa-solid fa-link' : 'fa-solid fa-comment-dots';
 
                 linkElement.innerHTML = `
@@ -194,5 +196,6 @@
 
 </body>
 </html>
+
 
 
