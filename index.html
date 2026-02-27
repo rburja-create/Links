@@ -66,6 +66,7 @@
 </div>
 
 <script>
+    // Your Google Apps Script Web App URL
     const API_URL = "https://script.google.com/macros/s/AKfycbwHAXN8BY9cpnJ5BkE9FMRevNA7krEy1yt-qeapbwBDopp5hBkIizYf-WUJahzAY9RZJQ/exec";
 
     function openMessagePage(message) {
@@ -146,7 +147,8 @@
         const titleElement = document.getElementById('title');
         
         try {
-            const response = await fetch(API_URL);
+            // Added ?nocache= timestamp to prevent the browser from showing the same quote from memory
+            const response = await fetch(API_URL + "?nocache=" + new Date().getTime());
             const data = await response.json();
             
             if (data.pageTitle) titleElement.innerText = data.pageTitle;
@@ -179,6 +181,7 @@
                 listContainer.appendChild(linkElement);
             });
         } catch (error) {
+            console.error("Fetch Error:", error);
             listContainer.innerHTML = 'Failed to load links.';
         }
     }
@@ -187,4 +190,3 @@
 </script>
 </body>
 </html>
-
