@@ -6,68 +6,157 @@
     <title>My Dynamic Directory</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg: #0f172a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #38bdf8;
+            --text: #f1f5f9;
+            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            display: flex; align-items: center; justify-content: center; 
-            min-height: 100vh; color: white;
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 15px;
+            line-height: 1.6;
         }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .container { max-width: 900px; margin: 0 auto; }
+
+        header { text-align: center; margin: 40px 0; }
+        h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 25px; }
+
+        /* Search Interface */
+        .search-box {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto 40px auto;
+        }
+        #searchBar {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            color: white;
+            font-size: 16px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        #searchBar:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 18px;
         }
 
-        .container { 
-            width: 95%; max-width: 420px; text-align: center; 
-            padding: 40px 25px; 
-            background: rgba(255, 255, 255, 0.1); 
-            backdrop-filter: blur(16px); 
-            border-radius: 24px; 
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
         }
 
-        h1 { margin-bottom: 25px; font-size: 2.2rem; }
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+        }
 
-        .link-card { 
+        .category-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(16px);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .category-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 10px;
+        }
+
+        .link-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px; padding: 18px; 
-            background: rgba(255, 255, 255, 0.15); 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 14px; 
-            transition: all 0.3s ease; 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-weight: 600;
+            background: rgba(255, 255, 255, 0.03);
+            margin-bottom: 10px;
+            padding: 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+            cursor: pointer;
         }
 
-        .link-card:hover { 
-            background: rgba(255, 255, 255, 0.3); 
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .link-item:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: var(--accent);
+            transform: translateX(8px);
         }
 
-        #links-list.loading { opacity: 0.5; }
+        .link-item span { font-weight: 500; font-size: 0.95rem; flex: 1; padding-right: 10px; }
+        
+        #loader { text-align: center; padding: 80px; font-size: 1.2rem; }
+        .hidden { display: none !important; }
+        
+        .error-msg {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #f87171;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1 id="title">Loading...</h1>
-    <div id="links-list" class="loading">Fetching data...</div>
+    <header>
+        <h1 id="page-title">Loading...</h1>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchBar" placeholder="Search links..." onkeyup="filterLinks()">
+        </div>
+    </header>
+
+    <div id="loader">
+        <i class="fas fa-circle-notch fa-spin"></i> Loading Data...
+    </div>
+
+    <div id="main-grid" class="grid"></div>
 </div>
 
 <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbyFom3oN4QkKTkyh5cQ1n3TYzU2CsplUwkxPccbIzlr4O-2DKq0G16QrDbCksAlK1TlhQ/exec";
 
+    // Reusable Message Page Functionality
     function openMessagePage(message) {
         const newWin = window.open('', '_blank');
         if (!newWin) return;
@@ -83,23 +172,16 @@
                     body { 
                         margin: 0; padding: 0;
                         font-family: 'Inter', -apple-system, sans-serif; 
-                        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-                        background-size: 400% 400%;
-                        animation: gradient 15s ease infinite;
+                        background: radial-gradient(circle at top right, #1e293b, #0f172a);
                         display: flex; align-items: center; justify-content: center; 
                         min-height: 100vh; color: white; overflow: hidden;
                     }
-                    @keyframes gradient {
-                        0% { background-position: 0% 50%; }
-                        50% { background-position: 100% 50%; }
-                        100% { background-position: 0% 50%; }
-                    }
                     .msg-box {
                         padding: 40px;
-                        background: rgba(255, 255, 255, 0.1); 
+                        background: rgba(255, 255, 255, 0.05); 
                         backdrop-filter: blur(16px); 
                         border-radius: 24px; 
-                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        border: 1px solid rgba(255, 255, 255, 0.1);
                         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
                         max-width: 85%;
                         text-align: center;
@@ -114,17 +196,17 @@
                     .btn {
                         display: inline-flex; align-items: center; gap: 8px;
                         padding: 12px 30px;
-                        background: rgba(255, 255, 255, 0.2);
-                        color: white;
+                        background: rgba(56, 189, 248, 0.2);
+                        color: #38bdf8;
                         text-decoration: none;
                         border-radius: 12px;
                         font-weight: 600;
                         transition: all 0.3s ease;
-                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        border: 1px solid rgba(56, 189, 248, 0.3);
                         cursor: pointer;
                         font-size: 14px;
                     }
-                    .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+                    .btn:hover { background: rgba(56, 189, 248, 0.3); transform: translateY(-2px); }
                 </style>
             </head>
             <body>
@@ -142,51 +224,57 @@
     }
 
     async function loadLinks() {
-        const listContainer = document.getElementById('links-list');
-        const titleElement = document.getElementById('title');
+        const grid = document.getElementById('main-grid');
+        const loader = document.getElementById('loader');
+        const titleElement = document.getElementById('page-title');
         
         try {
             const response = await fetch(API_URL);
             const data = await response.json();
             
+            loader.classList.add('hidden');
             if (data.pageTitle) titleElement.innerText = data.pageTitle;
 
-            listContainer.innerHTML = '';
-            listContainer.classList.remove('loading');
-
-            data.links.forEach(item => {
-                const linkElement = document.createElement('a');
-                linkElement.className = 'link-card';
-
+            // Group links into one card for this specific API structure
+            // (Since the original Links API returns a flat list)
+            const card = document.createElement('div');
+            card.className = 'category-card';
+            
+            const titleHtml = `<div class="category-title"><i class="fas fa-list"></i> Directory</div>`;
+            
+            let linksHtml = data.links.map(item => {
                 const isWebLink = (item.url && typeof item.url === 'string') ? item.url.toLowerCase().trim().startsWith('http') : false;
                 const iconClass = isWebLink ? 'fa-solid fa-link' : 'fa-solid fa-comment-dots';
-
-                linkElement.innerHTML = `
-                    <span>${item.name}</span>
-                    <i class="${iconClass}"></i>
+                
+                // Return string with appropriate behavior
+                return `
+                    <div class="link-item" onclick="${isWebLink ? `window.open('${item.url}', '_blank')` : `openMessagePage(\`${item.url.replace(/`/g, '\\`')}\`)`}">
+                        <span>${item.name}</span>
+                        <i class="${iconClass}" style="font-size: 0.8rem; opacity: 0.4;"></i>
+                    </div>
                 `;
+            }).join('');
 
-                if (isWebLink) {
-                    linkElement.href = item.url;
-                    linkElement.target = '_blank';
-                } else {
-                    linkElement.href = "#";
-                    linkElement.onclick = (e) => {
-                        e.preventDefault();
-                        openMessagePage(item.url);
-                    };
-                }
-                listContainer.appendChild(linkElement);
-            });
+            card.innerHTML = titleHtml + `<div class="links-list">${linksHtml}</div>`;
+            grid.appendChild(card);
+
         } catch (error) {
-            listContainer.innerHTML = 'Failed to load links.';
+            console.error(error);
+            loader.innerHTML = `<div class="error-msg">Failed to load links. Check API deployment.</div>`;
         }
+    }
+
+    function filterLinks() {
+        const term = document.getElementById('searchBar').value.toLowerCase();
+        const items = document.querySelectorAll('.link-item');
+        
+        items.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            item.style.display = text.includes(term) ? "flex" : "none";
+        });
     }
 
     loadLinks();
 </script>
 </body>
 </html>
-
-
-
